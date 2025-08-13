@@ -6,8 +6,8 @@ const cors = require('cors')
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:5173', // Your frontend's address
-  credentials: true, // Allow cookies to be sent
+    origin: process.env.FRONTEND_URL, // Use the environment variable
+    credentials: true,
 };
 
 
