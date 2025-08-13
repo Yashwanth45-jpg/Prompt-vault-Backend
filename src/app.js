@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const session = require('express-session'); // NEW
 const app = express();
+const MongoStore = require('connect-mongo');
 
 const corsOptions = {
     origin: process.env.FRONTEND_URL,
@@ -16,11 +17,15 @@ app.use(cors(corsOptions));
 
 // Configure and use express-session
 app.use(session({
-    secret: process.env.SESSION_SECRET, // Make sure to set this in your .env file
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI, // Use your existing MongoDB URI
+        collectionName: 'sessions',
+    }),
     cookie: {
-        secure: true, // This is crucial for HTTPS on production
+        secure: true,
         httpOnly: true,
         sameSite: 'none',
         maxAge: 1000 * 60 * 60 * 24 // 1 day
