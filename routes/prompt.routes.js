@@ -1,6 +1,6 @@
 const express = require('express')
 const {promptController, publishPrompt, upvotePrompt,getCommunityPrompts, getMyPrompts} = require('../controllers/prompt.controller')
-const authMiddleware  = require('../middleware/auth.middleware')
+const {authMiddleware}  = require('../middleware/auth.middleware')
 const searchPromptController = require('../controllers/searchprompt.controller')
 const router = express.Router();
 
