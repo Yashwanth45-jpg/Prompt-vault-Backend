@@ -7,7 +7,7 @@ const cors = require('cors')
 const app = express();
 
 const corsOptions = {
-    origin: 'https://prompt-valut-app.netlify.app/', // Use the environment variable
+    origin: 'https://prompt-valut-app.netlify.app', // Use the environment variable
     credentials: true,
 };
 
