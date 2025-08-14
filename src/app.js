@@ -1,47 +1,25 @@
-require('dotenv').config();
-const express = require('express');
+require('dotenv').config()
+const express =  require('express');
 const authRoutes = require('../routes/auth.routes');
 const promptRoutes = require('../routes/prompt.routes');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-const session = require('express-session'); // NEW
+const cookieParser = require('cookie-parser')
+const cors = require('cors')
 const app = express();
-const MongoStore = require('connect-mongo');
 
 const corsOptions = {
-    origin: process.env.FRONTEND_URL,
+    origin: 'http://localhost:5173', // Use the environment variable
     credentials: true,
 };
 
+
 app.use(cors(corsOptions));
 
-// Configure and use express-session
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URL, // Use your existing MongoDB URI
-        collectionName: 'sessions',
-    }),
-    cookie: {
-        secure: true,
-        httpOnly: true,
-        sameSite: 'none',
-        maxAge: 1000 * 60 * 60 * 24 // 1 day
-    },
-}));
-
-// Add this root route to prevent "Cannot GET /" error
-app.get('/', (req, res) => {
-    res.status(200).send('Your PromptVault Backend API is running!');
-});
-
-// 2. Parse JSON bodies and cookies
+// 2. Parse JSON bodies and cookies so they are available in subsequent middleware and routes.
 app.use(express.json());
 app.use(cookieParser());
 
 app.use((req, res, next) => {
+    // Pull the 'io' instance from the app object where we attached it
     req.io = req.app.get('io');
     next();
 });
