@@ -7,7 +7,7 @@ const cors = require('cors')
 const app = express();
 
 const corsOptions = {
-    origin: 'https://prompt-vault-frontend-one.vercel.app', // Use the environment variable
+    origin: 'https://coruscating-alfajores-eedf97.netlify.app/', // Use the environment variable
     credentials: true,
 };
 
