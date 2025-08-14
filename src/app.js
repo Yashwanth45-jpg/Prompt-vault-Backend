@@ -7,7 +7,7 @@ const cors = require('cors')
 const app = express();
 
 const corsOptions = {
-    origin: 'http://localhost:5173', // Use the environment variable
+    origin: 'https://prompt-vault-frontend-one.vercel.app', // Use the environment variable
     credentials: true,
 };
 

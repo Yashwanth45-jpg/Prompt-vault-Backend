@@ -17,7 +17,7 @@ const server = app.listen(PORT, () => {
 // 2. Create the Socket.IO server using the http server instance
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:5173', // Or your deployed frontend URL
+    origin: 'https://prompt-vault-frontend-one.vercel.app', // Or your deployed frontend URL
     methods: ["GET", "POST", "PUT"],
     credentials: true,
   }
