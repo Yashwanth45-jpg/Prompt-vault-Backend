@@ -53,7 +53,8 @@ async function loginController(req, res) {
     const isPasswordExits =  await bcrypt.compare(password, user.password);
 
     if(!isPasswordExits) {
-        return res.status().json({
+        // I also fixed a small bug here where the status code was missing
+        return res.status(401).json({
             msg:"Password is Incorrect"
         })
     }
@@ -62,9 +63,11 @@ async function loginController(req, res) {
 
     res.cookie("token", token);
 
+    // This is the corrected response. It now includes the token.
     res.status(201).json({
         msg:"User LoggedIn Successfully",
-        user
+        user,
+        token // <-- THE FIX IS HERE
     })
 }
 
