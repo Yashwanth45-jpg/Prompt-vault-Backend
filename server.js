@@ -17,7 +17,7 @@ const server = app.listen(PORT, () => {
 // 2. Create the Socket.IO server using the http server instance
 const io = new Server(server, {
   cors: {
-    origin: 'https://coruscating-alfajores-eedf97.netlify.app', // Or your deployed frontend URL
+    origin: 'https://prompt-valut-app.netlify.app/', // Or your deployed frontend URL
     methods: ["GET", "POST", "PUT"],
     credentials: true,
   }
